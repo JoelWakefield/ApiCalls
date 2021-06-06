@@ -1,0 +1,61 @@
+﻿@model ApiCalls.Models.SeleucidFacts
+
+    <style>
+        .seleucid {
+            background-color: lightblue;
+            margin: 0.8em;
+            padding: 0.6em;
+        }
+
+        .regin {
+            padding: 0.5em;
+        }
+
+        .consort {
+            padding: 0.2em;
+        }
+
+        .consort label {
+            font-size: 18px;
+        }
+
+        .consort ul {
+            list-style-type: none;
+        }
+    </style>
+
+<h2>Seleucids</h2>
+
+@foreach (var seleucid in Model.Seleucids)
+{
+    <div class="seleucid">
+        <h4>@seleucid.Name</h4>
+
+        <div class="reign">
+            <div>
+                Start Reign: @seleucid.StartReign
+            </div>
+            <div>
+                End Reign: @seleucid.EndReign
+            </div>
+        </div>
+
+        @if (seleucid.Consorts.Count > 0)
+                {
+        <div class="consort">
+            <label>Consorts</label>
+
+            <ul>
+            @foreach (var consort in seleucid.Consorts)
+                    {
+                <li>
+                    @consort
+                </li>
+                    }
+            </ul>
+
+        </div>
+                }
+
+    </div>
+}
