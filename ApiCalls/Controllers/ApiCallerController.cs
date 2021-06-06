@@ -12,6 +12,7 @@ namespace ApiCalls.Controllers
     public class ApiCallerController : Controller
     {
         static readonly HttpClient client = new HttpClient();
+        static readonly string baseUrl = "https://seriouslyfundata.azurewebsites.net/api/";
 
         public IActionResult Index()
         {
@@ -20,7 +21,7 @@ namespace ApiCalls.Controllers
 
         public async Task<IActionResult> RandomNumber()
         {
-            var response = await client.GetAsync("https://seriouslyfundata.azurewebsites.net/api/generatearandomnumber");
+            var response = await client.GetAsync(baseUrl + "generatearandomnumber");
             response.EnsureSuccessStatusCode();
 
             var responseString = await response.Content.ReadAsStringAsync();
@@ -30,32 +31,22 @@ namespace ApiCalls.Controllers
 
         public async Task<IActionResult> ChuckNoris()
         {
-            var response = await client.GetAsync("https://seriouslyfundata.azurewebsites.net/api/chucknorrisfact");
+            var response = await client.GetAsync(baseUrl + "chucknorrisfact");
             response.EnsureSuccessStatusCode();
 
             var contentStream = await response.Content.ReadAsStringAsync();
             var content = JsonConvert.DeserializeObject<ChuckNorisFact>(contentStream);
-
-            //var content = await System.Text.Json.JsonSerializer.DeserializeAsync<ChuckNorisFact>(
-            //    contentStream, 
-            //    new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            //);
 
             return View(content);
         }
 
         public async Task<IActionResult> Seleucids()
         {
-            var response = await client.GetAsync("https://seriouslyfundata.azurewebsites.net/api/seleucids");
+            var response = await client.GetAsync(baseUrl + "seleucids");
             response.EnsureSuccessStatusCode();
 
             var contentStream = await response.Content.ReadAsStringAsync();
             var content = JsonConvert.DeserializeObject<SeleucidFacts>(contentStream);
-            
-            //var content = await System.Text.Json.JsonSerializer.DeserializeAsync<Seleucid>(
-            //    contentStream,
-            //    new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            //);
 
             return View(content);
         }
