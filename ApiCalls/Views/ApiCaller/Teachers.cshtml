@@ -1,0 +1,16 @@
+﻿@model List<ApiCalls.Models.Teacher>
+
+
+<table style="width: 100%">
+    <tr>
+        <th>Name</th>
+        <th>HomeState</th>
+    </tr>
+    @foreach (var teacher in Model)
+            {
+    <tr>
+        <td>@teacher.Name</td>
+        <td>@teacher.HomeState</td>
+    </tr>
+            }
+</table>

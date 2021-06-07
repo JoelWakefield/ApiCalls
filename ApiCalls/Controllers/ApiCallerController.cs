@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using ApiCalls.Models;
 using Newtonsoft.Json;
+using System.Xml.Serialization;
+using System.IO;
+using ApiCalls.Data;
 
 namespace ApiCalls.Controllers
 {
@@ -14,6 +17,13 @@ namespace ApiCalls.Controllers
         static readonly HttpClient client = new HttpClient();
         static readonly string baseUrl = "https://seriouslyfundata.azurewebsites.net/api/";
 
+        private ApiData _apiData;
+
+        public ApiCallerController(ApiData apiData)
+        {
+            _apiData = apiData;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -21,34 +31,27 @@ namespace ApiCalls.Controllers
 
         public async Task<IActionResult> RandomNumber()
         {
-            var response = await client.GetAsync(baseUrl + "generatearandomnumber");
-            response.EnsureSuccessStatusCode();
-
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return View(Convert.ToInt32(responseString));
+            return View(await _apiData.GetRandomNumber());
         }
 
         public async Task<IActionResult> ChuckNoris()
         {
-            var response = await client.GetAsync(baseUrl + "chucknorrisfact");
-            response.EnsureSuccessStatusCode();
-
-            var contentStream = await response.Content.ReadAsStringAsync();
-            var content = JsonConvert.DeserializeObject<ChuckNorisFact>(contentStream);
-
-            return View(content);
+            return View(await _apiData.GetChuckNorisJoke());
         }
 
         public async Task<IActionResult> Seleucids()
         {
-            var response = await client.GetAsync(baseUrl + "seleucids");
-            response.EnsureSuccessStatusCode();
+            return View(await _apiData.GetSeleucidFacts());
+        }
 
-            var contentStream = await response.Content.ReadAsStringAsync();
-            var content = JsonConvert.DeserializeObject<SeleucidFacts>(contentStream);
+        public async Task<IActionResult> Teacher()
+        {
+            return View(await _apiData.GetATeacher());
+        }
 
-            return View(content);
+        public async Task<IActionResult> Teachers()
+        {
+            return View(await _apiData.GetTeachers());
         }
     }
 }

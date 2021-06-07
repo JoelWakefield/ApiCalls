@@ -360,3 +360,5 @@ C:\dev\Improving\Practice\ApiCalls\ApiCalls\obj\Debug\net5.0\ref\ApiCalls.dll
 C:\dev\Improving\Practice\ApiCalls\ApiCalls\obj\Debug\net5.0\ApiCalls.pdb
 C:\dev\Improving\Practice\ApiCalls\ApiCalls\obj\Debug\net5.0\ApiCalls.genruntimeconfig.cache
 C:\dev\Improving\Practice\ApiCalls\ApiCalls\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\dev\Improving\Practice\ApiCalls\ApiCalls\obj\Debug\net5.0\Razor\Views\ApiCaller\Teacher.cshtml.g.cs
+C:\dev\Improving\Practice\ApiCalls\ApiCalls\obj\Debug\net5.0\Razor\Views\ApiCaller\Teachers.cshtml.g.cs
